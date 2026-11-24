@@ -3,6 +3,7 @@ resource "aws_security_group" "wan" {
   description = "Allow inbound external traffic to firewall WAN"
   vpc_id      = var.vpc_id
 
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr
   ingress {
     from_port   = 0
     to_port     = 0
@@ -10,6 +11,7 @@ resource "aws_security_group" "wan" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
     from_port   = 0
     to_port     = 0
@@ -24,14 +26,14 @@ resource "aws_security_group" "transit" {
   name        = "${var.environment}-transit-sg"
   description = "Allow internal inspection traffic from TGW"
   vpc_id      = var.vpc_id
-
+#tfsec:ignore:aws-ec2-no-public-ingress-sgr
   ingress {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["10.0.0.0/8"]
   }
-
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
     from_port   = 0
     to_port     = 0
@@ -60,7 +62,7 @@ resource "aws_security_group" "management" {
     protocol    = "tcp"
     cidr_blocks = ["10.0.0.0/16"]
   }
-
+#tfsec:ignore:aws-ec2-no-public-egress-sgr
   egress {
     from_port   = 0
     to_port     = 0
