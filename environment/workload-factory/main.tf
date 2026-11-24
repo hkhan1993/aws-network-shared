@@ -129,3 +129,5 @@ resource "aws_ec2_transit_gateway_route" "hub_to_core_app_2" {
   destination_cidr_block         = module.workload_app_2_tier.vpc_cidr
   transit_gateway_attachment_id  = module.workload_app_2_tier.transit_gateway_attachment_id
 }
+
+## adding this comment to test the git commit hook
